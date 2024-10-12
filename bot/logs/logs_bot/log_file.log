@@ -1,0 +1,357 @@
+2024-10-10 20:58:38 | ERROR    | aiogram.dispatcher.event.handler:call:43 - An error has been caught in function 'call', process 'MainProcess' (1), thread 'MainThread' (130147127073664):
+Traceback (most recent call last):
+
+  File "/bot/bot_main.py", line 959, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x765e37009b20>
+    │       └ <function run at 0x765e3c950a40>
+    └ <module 'asyncio' from '/usr/local/lib/python3.11/asyncio/__init__.py'>
+
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x765e3704e190>
+           │      └ <function Runner.run at 0x765e3c7905e0>
+           └ <asyncio.runners.Runner object at 0x765e376ddd50>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /bot/bot_main.py:953> wait_for=<Future pending cb=[Task.task_wakeup()]> c...
+           │    │     └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           │    └ <uvloop.Loop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x765e376ddd50>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,)}
+                     │    │           │    └ Update(update_id=730465835, message=Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(U...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x765e37092490>
+                     │    └ <function Dispatcher.feed_update at 0x765e38f7ae80>
+                     └ <Dispatcher '0x765e37093b10'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x765e38f79940>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x765e36fe7ed0>
+                     └ <Dispatcher '0x765e37093b10'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465835, message=Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(U...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x765e36ffc450>, functools.par...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 49, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465835, message=Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(U...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x765e36ffc4d0>, <function TelegramEventObserver.tri...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465835, message=Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(U...
+                 └ <function TelegramEventObserver.trigger at 0x765e3b177b00>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │             └ Update(update_id=730465835, message=Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(U...
+                 └ <function CallableObject.call at 0x765e3b1779c0>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x765e37093b10'>>, Update(update_id=730465835, mess...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │    │                           │                  └ Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x765e38f7a480>
+                 └ <Dispatcher '0x765e37093b10'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │        │                     │               └ Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x765e3700ade0>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x765e38f79940>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x765e370d4f50>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x765e38f7a520>
+                 └ <Dispatcher '0x765e37093b10'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                     │        │       └ Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x765e38f79a80>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x765e370d4f50>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x765e37093b10'>, 'bots': (<aiogram.client.bot.Bot object at 0x765e37092490>,), 'bot': <aiogram.c...
+                 │             └ Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 38, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 └ <function CallableObject.call at 0x765e3700b2e0>
+> File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start at 0x765e36ff8a40>, Message(message_id=2775, date=datetime.datetime(2024, 10, 10, 20, 58, 3...
+
+  File "/bot/bot_main.py", line 104, in start
+    await public_post_in_channel("@iforextest", 'static/menu_pic.jpg', 'sdsadas', 237)
+          └ <function public_post_in_channel at 0x765e370080e0>
+
+  File "/bot/bot_main.py", line 734, in public_post_in_channel
+    raise FileNotFoundError(f"Файл по пути {file_path} не найден")
+
+FileNotFoundError: Файл по пути /bot/media/static/menu_pic.jpg не найден
+2024-10-10 20:59:33 | ERROR    | aiogram.dispatcher.event.handler:call:43 - An error has been caught in function 'call', process 'MainProcess' (1), thread 'MainThread' (132507407350656):
+Traceback (most recent call last):
+
+  File "/bot/bot_main.py", line 960, in <module>
+    asyncio.run(main())
+    │       │   └ <function main at 0x7883c2a35760>
+    │       └ <function run at 0x7883c8400a40>
+    └ <module 'asyncio' from '/usr/local/lib/python3.11/asyncio/__init__.py'>
+
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 190, in run
+    return runner.run(main)
+           │      │   └ <coroutine object main at 0x7883c2d26400>
+           │      └ <function Runner.run at 0x7883c82445e0>
+           └ <asyncio.runners.Runner object at 0x7883c63eec90>
+  File "/usr/local/lib/python3.11/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           │    │     │                  └ <Task pending name='Task-1' coro=<main() running at /bot/bot_main.py:954> wait_for=<Future pending cb=[Task.task_wakeup()]> c...
+           │    │     └ <method 'run_until_complete' of 'uvloop.loop.Loop' objects>
+           │    └ <uvloop.Loop running=True closed=False debug=False>
+           └ <asyncio.runners.Runner object at 0x7883c63eec90>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 309, in _process_update
+    response = await self.feed_update(bot, update, **kwargs)
+                     │    │           │    │         └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,)}
+                     │    │           │    └ Update(update_id=730465836, message=Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(U...
+                     │    │           └ <aiogram.client.bot.Bot object at 0x7883c2b025d0>
+                     │    └ <function Dispatcher.feed_update at 0x7883c498eac0>
+                     └ <Dispatcher '0x7883c2b02210'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 158, in feed_update
+    response = await self.update.wrap_outer_middleware(
+                     │    │      └ <function TelegramEventObserver.wrap_outer_middleware at 0x7883c498d580>
+                     │    └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7883c2a16b90>
+                     └ <Dispatcher '0x7883c2b02210'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/error.py", line 25, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465836, message=Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(U...
+                 └ functools.partial(<aiogram.dispatcher.middlewares.user_context.UserContextMiddleware object at 0x7883c2a170d0>, functools.par...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/middlewares/user_context.py", line 49, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465836, message=Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(U...
+                 └ functools.partial(<aiogram.fsm.middleware.FSMContextMiddleware object at 0x7883c2a17150>, <function TelegramEventObserver.tri...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/fsm/middleware.py", line 42, in __call__
+    return await handler(event, data)
+                 │       │      └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │       └ Update(update_id=730465836, message=Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(U...
+                 └ <function TelegramEventObserver.trigger at 0x7883c6c93b00>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │             └ Update(update_id=730465836, message=Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(U...
+                 └ <function CallableObject.call at 0x7883c6c939c0>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<bound method Dispatcher._listen_update of <Dispatcher '0x7883c2b02210'>>, Update(update_id=730465836, mess...
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/dispatcher.py", line 276, in _listen_update
+    return await self.propagate_event(update_type=update_type, event=event, **kwargs)
+                 │    │                           │                  │        └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │    │                           │                  └ Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 │    │                           └ 'message'
+                 │    └ <function Router.propagate_event at 0x7883c498e0c0>
+                 └ <Dispatcher '0x7883c2b02210'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 142, in propagate_event
+    return await observer.wrap_outer_middleware(_wrapped, event=event, data=kwargs)
+                 │        │                     │               │           └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │        │                     │               └ Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 │        │                     └ <function Router.propagate_event.<locals>._wrapped at 0x7883c2a36a20>
+                 │        └ <function TelegramEventObserver.wrap_outer_middleware at 0x7883c498d580>
+                 └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7883c30e2d10>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 137, in _wrapped
+    return await self._propagate_event(
+                 │    └ <function Router._propagate_event at 0x7883c498e160>
+                 └ <Dispatcher '0x7883c2b02210'>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/router.py", line 162, in _propagate_event
+    response = await observer.trigger(event, **kwargs)
+                     │        │       │        └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                     │        │       └ Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                     │        └ <function TelegramEventObserver.trigger at 0x7883c498d6c0>
+                     └ <aiogram.dispatcher.event.telegram.TelegramEventObserver object at 0x7883c30e2d10>
+  File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/telegram.py", line 121, in trigger
+    return await wrapped_inner(event, kwargs)
+                 │             │      └ {'dispatcher': <Dispatcher '0x7883c2b02210'>, 'bots': (<aiogram.client.bot.Bot object at 0x7883c2b025d0>,), 'bot': <aiogram.c...
+                 │             └ Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 32, tzinfo=TzInfo(UTC)), chat=Chat(id=718586333, type='...
+                 └ <function CallableObject.call at 0x7883c2a36f20>
+> File "/usr/local/lib/python3.11/site-packages/aiogram/dispatcher/event/handler.py", line 43, in call
+    return await wrapped()
+                 └ functools.partial(<function start at 0x7883c2a20680>, Message(message_id=2776, date=datetime.datetime(2024, 10, 10, 20, 59, 3...
+
+  File "/bot/bot_main.py", line 121, in start
+    if await get_user_bot(user_id, session):
+             │            │        └ <sqlalchemy.orm.session.AsyncSession object at 0x7883c67bb910>
+             │            └ 718586333
+             └ <function get_user_bot at 0x7883c2d085e0>
+
+  File "/bot/utils/bot_utils/util.py", line 33, in get_user_bot
+    result = await session.execute(select(User).where(User.id_telegram == telegram_id))
+                   │       │       │      │           │    │              └ 718586333
+                   │       │       │      │           │    └ <sqlalchemy.orm.attributes.InstrumentedAttribute object at 0x7883c32f9760>
+                   │       │       │      │           └ <class 'models.users.User'>
+                   │       │       │      └ <class 'models.users.User'>
+                   │       │       └ <function select at 0x7883c3f4d580>
+                   │       └ <function AsyncSession.execute at 0x7883c3a92de0>
+                   └ <sqlalchemy.orm.session.AsyncSession object at 0x7883c67bb910>
+
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/ext/asyncio/session.py", line 461, in execute
+    result = await greenlet_spawn(
+                   └ <function greenlet_spawn at 0x7883c42c4d60>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 201, in greenlet_spawn
+    result = context.throw(*sys.exc_info())
+             │       │      │   └ <built-in function exc_info>
+             │       │      └ <module 'sys' (built-in)>
+             │       └ <method 'throw' of 'greenlet.greenlet' objects>
+             └ <_AsyncIoGreenlet object at 0x7883c30e0e00 (otid=0x7883c49b2340) dead>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           │    └ <function Session._execute_internal at 0x7883c3bab740>
+           └ <sqlalchemy.orm.session.Session object at 0x7883c2d3df10>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2226, in _execute_internal
+    conn = self._connection_for_bind(bind)
+           │    │                    └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+           │    └ <function Session._connection_for_bind at 0x7883c3bab4c0>
+           └ <sqlalchemy.orm.session.Session object at 0x7883c2d3df10>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2095, in _connection_for_bind
+    return trans._connection_for_bind(engine, execution_options)
+           │     │                    │       └ None
+           │     │                    └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+           │     └ <function SessionTransaction._connection_for_bind at 0x7883c3ba9f80>
+           └ <sqlalchemy.orm.session.SessionTransaction object at 0x7883c2a93840>
+  File "<string>", line 2, in _connection_for_bind
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                │  │      │      └ {}
+                │  │      └ (Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database), None)
+                │  └ <sqlalchemy.orm.session.SessionTransaction object at 0x7883c2a93840>
+                └ <function SessionTransaction._connection_for_bind at 0x7883c3ba9da0>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1189, in _connection_for_bind
+    conn = bind.connect()
+           │    └ <function Engine.connect at 0x7883c3db5080>
+           └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3276, in connect
+    return self._connection_cls(self)
+           │    │               └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+           │    └ <class 'sqlalchemy.engine.base.Connection'>
+           └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 146, in __init__
+    self._dbapi_connection = engine.raw_connection()
+    │                        │      └ <function Engine.raw_connection at 0x7883c3db5120>
+    │                        └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+    └ <sqlalchemy.engine.base.Connection object at 0x7883c2a58850>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 3300, in raw_connection
+    return self.pool.connect()
+           │    │    └ <function Pool.connect at 0x7883c433fba0>
+           │    └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+           └ Engine(postgresql+asyncpg://senyaiforex:***@localhost:5432/tg_bot_database)
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 449, in connect
+    return _ConnectionFairy._checkout(self)
+           │                │         └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+           │                └ <classmethod(<function _ConnectionFairy._checkout at 0x7883c4359c60>)>
+           └ <class 'sqlalchemy.pool.base._ConnectionFairy'>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 1263, in _checkout
+    fairy = _ConnectionRecord.checkout(pool)
+            │                 │        └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+            │                 └ <classmethod(<function _ConnectionRecord.checkout at 0x7883c43587c0>)>
+            └ <class 'sqlalchemy.pool.base._ConnectionRecord'>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 712, in checkout
+    rec = pool._do_get()
+          │    └ <function QueuePool._do_get at 0x7883c436d3a0>
+          └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 179, in _do_get
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from '/usr/local/lib/python3.11/site-packages/sqlalchemy/util/__init__.py'>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x7883c2d7f900>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ ConnectionRefusedError(111, 'Connection refused')
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/impl.py", line 177, in _do_get
+    return self._create_connection()
+           │    └ <function Pool._create_connection at 0x7883c433f920>
+           └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 390, in _create_connection
+    return _ConnectionRecord(self)
+           │                 └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+           └ <class 'sqlalchemy.pool.base._ConnectionRecord'>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 674, in __init__
+    self.__connect()
+    └ <sqlalchemy.pool.base._ConnectionRecord object at 0x7883c4b432a0>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 900, in __connect
+    with util.safe_reraise():
+         │    └ <class 'sqlalchemy.util.langhelpers.safe_reraise'>
+         └ <module 'sqlalchemy.util' from '/usr/local/lib/python3.11/site-packages/sqlalchemy/util/__init__.py'>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+          │         │              └ <traceback object at 0x7883c2d7f4c0>
+          │         └ <method 'with_traceback' of 'BaseException' objects>
+          └ ConnectionRefusedError(111, 'Connection refused')
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/pool/base.py", line 896, in __connect
+    self.dbapi_connection = connection = pool._invoke_creator(self)
+    │    │                               │    │               └ <sqlalchemy.pool.base._ConnectionRecord object at 0x7883c4b432a0>
+    │    │                               │    └ <function create_engine.<locals>.connect at 0x7883c3e70b80>
+    │    │                               └ <sqlalchemy.pool.impl.AsyncAdaptedQueuePool object at 0x7883c3846e10>
+    │    └ <member 'dbapi_connection' of '_ConnectionRecord' objects>
+    └ <sqlalchemy.pool.base._ConnectionRecord object at 0x7883c4b432a0>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/create.py", line 643, in connect
+    return dialect.connect(*cargs, **cparams)
+           │       │        │        └ {'host': 'localhost', 'database': 'tg_bot_database', 'user': 'senyaiforex', 'password': 'senya2516', 'port': 5432}
+           │       │        └ []
+           │       └ <function DefaultDialect.connect at 0x7883c3e6cc20>
+           └ <sqlalchemy.dialects.postgresql.asyncpg.PGDialect_asyncpg object at 0x7883c3aa2250>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 620, in connect
+    return self.loaded_dbapi.connect(*cargs, **cparams)
+           │    │            │        │        └ {'host': 'localhost', 'database': 'tg_bot_database', 'user': 'senyaiforex', 'password': 'senya2516', 'port': 5432}
+           │    │            │        └ ()
+           │    │            └ <function AsyncAdapt_asyncpg_dbapi.connect at 0x7883c37c5da0>
+           │    └ <sqlalchemy.dialects.postgresql.asyncpg.AsyncAdapt_asyncpg_dbapi object at 0x7883c3aa2450>
+           └ <sqlalchemy.dialects.postgresql.asyncpg.PGDialect_asyncpg object at 0x7883c3aa2250>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/dialects/postgresql/asyncpg.py", line 932, in connect
+    await_only(creator_fn(*arg, **kw)),
+    │          │           │      └ {'host': 'localhost', 'database': 'tg_bot_database', 'user': 'senyaiforex', 'password': 'senya2516', 'port': 5432}
+    │          │           └ ()
+    │          └ <function connect at 0x7883c388fce0>
+    └ <function await_only at 0x7883c4767240>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 132, in await_only
+    return current.parent.switch(awaitable)  # type: ignore[no-any-return,attr-defined] # noqa: E501
+           │       │             └ <coroutine object connect at 0x7883c2b46bc0>
+           │       └ <attribute 'parent' of 'greenlet.greenlet' objects>
+           └ <_AsyncIoGreenlet object at 0x7883c30e0e00 (otid=0x7883c49b2340) dead>
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/util/_concurrency_py3k.py", line 196, in greenlet_spawn
+    value = await result
+                  └ <coroutine object connect at 0x7883c2b46bc0>
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connection.py", line 2329, in connect
+    return await connect_utils._connect(
+                 │             └ <function _connect at 0x7883c388f9c0>
+                 └ <module 'asyncpg.connect_utils' from '/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py'>
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 1017, in _connect
+    raise last_error or exceptions.TargetServerAttributeNotMatched(
+          │             │          └ <class 'asyncpg.exceptions._base.TargetServerAttributeNotMatched'>
+          │             └ <module 'asyncpg.exceptions' from '/usr/local/lib/python3.11/site-packages/asyncpg/exceptions/__init__.py'>
+          └ ConnectionRefusedError(111, 'Connection refused')
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 991, in _connect
+    conn = await _connect_addr(
+                 └ <function _connect_addr at 0x7883c388f2e0>
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 828, in _connect_addr
+    return await __connect_addr(params, True, *args)
+                 │              │              └ (('localhost', 5432), <uvloop.Loop running=True closed=False debug=False>, ConnectionConfiguration(command_timeout=None, stat...
+                 │              └ ConnectionParameters(user='senyaiforex', password='senya2516', database='tg_bot_database', ssl=<ssl.SSLContext object at 0x78...
+                 └ <function __connect_addr at 0x7883c388f380>
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 873, in __connect_addr
+    tr, pr = await connector
+                   └ <coroutine object _create_ssl_connection at 0x7883c2b66b90>
+  File "/usr/local/lib/python3.11/site-packages/asyncpg/connect_utils.py", line 744, in _create_ssl_connection
+    tr, pr = await loop.create_connection(
+                   │    └ <method 'create_connection' of 'uvloop.loop.Loop' objects>
+                   └ <uvloop.Loop running=True closed=False debug=False>
+  File "uvloop/loop.pyx", line 2039, in create_connection
+    raise exceptions[0]
+  File "uvloop/loop.pyx", line 2016, in uvloop.loop.Loop.create_connection
+    await waiter
+
+ConnectionRefusedError: [Errno 111] Connection refused

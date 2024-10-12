@@ -1,0 +1,103 @@
+version: '3.8'
+
+services:
+  redis-app:
+    image: redis
+    hostname: redis
+    ports:
+      - "6379:6379"
+    networks:
+      - my_network
+    env_file:
+      - .env
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+    command: [
+      "redis-server",
+      "--maxmemory", "512mb",
+      "--maxmemory-policy", "allkeys-lru",
+      "--lazyfree-lazy-eviction", "yes"
+    ]
+  fastapi:
+    build:
+      context: .
+      dockerfile: ./app/Dockerfile
+    container_name: fastapi_app
+    command: ["/app/apply_migrations.sh"]
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./models:/app/models
+      - ./repository:/app/repository
+      - ./utils:/app/utils
+      - ./database.py:/app/database.py
+      - ./app/logs:/app/logs
+      - ./migrations:/app/migrations
+      - ./alembic.ini:/app/alembic.ini
+    depends_on:
+      - redis-app
+      - db-shop
+    networks:
+      - my_network
+    env_file:
+      - .env
+  bot:
+    build:
+      context: .
+      dockerfile: ./bot/Dockerfile
+    container_name: telegram_bot
+    ports:
+      - "8443:8443"
+    volumes:
+      - ./models:/bot/models
+      - ./repository:/bot/repository
+      - ./utils:/bot/utils
+      - ./database.py:/bot/database.py
+      - ./media:/bot/media
+      - ./bot/logs:/bot/logs
+    networks:
+      - my_network
+    depends_on:
+      - fastapi
+    env_file:
+      - .env
+  celery-worker:
+    build:
+      context: .
+      dockerfile: ./bot/Dockerfile
+    container_name: celery_worker
+    command: celery -A tasks.app worker -B --loglevel=info
+    volumes:
+      - ./models:/bot/models
+      - ./repository:/bot/repository
+      - ./utils:/bot/utils
+      - ./database.py:/bot/database.py
+      - ./bot/logs:/bot/logs
+    networks:
+      - my_network
+    depends_on:
+      - bot
+    env_file:
+      - .env
+  db-shop:
+    image: postgres:16
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -d ${POSTGRES_DB} -U ${POSTGRES_USER}" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - my_network
+    env_file:
+      - .env
+networks:
+  my_network:
+    driver: bridge
