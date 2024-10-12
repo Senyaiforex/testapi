@@ -43,9 +43,6 @@ async def lifespan(app: FastAPI):
         # await conn.run_sync(Base.metadata.drop_all)
         await conn.run_sync(Base.metadata.create_all)
     async with async_session() as session:
-        await create_random_users(session)
-        await create_random_posts(session)
-        await create_tasks(session)
         await create_ranks(session)
         await create_categories(session)
         await create_liquid(session)
@@ -53,6 +50,9 @@ async def lifespan(app: FastAPI):
         await create_bank(session)
         await create_admins(session)
         await create_sellers(session)
+        await create_random_users(session)
+        await create_random_posts(session)
+        await create_tasks(session)
     yield
     await engine.dispose()
     await redis.close()
